@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Canvas Hexagonal Map</title>
+        <style type="text/css">
+            canvas { 
+                border:0;
+                display:block;
+                margin-left: 20px;
+                margin-top: 20px;
+
+            }
+            #body{
+                position: relative;
+            }
+            #hexmap{
+                float: left;
+                border-top: 2px solid red;
+                /*border-bottom: 2px solid red; */
+            }
+            #firster{
+
+            }
+            #later{
+                margin-left: 40px; 
+            }
+            #container{
+                position: absolute;
+                right: 200px;
+                top: 20px;
+                display: inline-block;
+                width: 200px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <canvas id="hexmap" width="720" height="624"></canvas>
+        <div id="container">
+            <button id="firster">AI先手</button>
+            <button id="later">AI后手</button>            
+        </div>
+        <script>
+        </script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

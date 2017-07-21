@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+let chessBoard=[];
+let sign=0;
+let color;
+let count=0;
+let value=[3,17,2,12,15,11,2,0,2,5,3,8,2,14,6,20];
+function possiblePlace(){
+	return [0,1];
+}
+
+function alphaBeta(chessBoard,alpha,beta,depth,isMax){
+	if(isMax){
+		console.log("极大层");
+	}else{
+		console.log("极小层");
+	}
+	console.log("alpha="+alpha+"  beta="+beta);
+	if(depth===0){
+		return estimate(chessBoard,color); 
+	}
+//	let place=possiblePlace(chessBoard);//可走步法
+	if(isMax){
+		for(let place of possiblePlace(chessBoard)){
+			chessBoard[sign++]=place; //放置棋子；
+			let MAX=alphaBeta(chessBoard,alpha,beta,depth-1,false);
+			//chessBoard //恢复
+			sign--;
+			if(MAX>alpha){
+				alpha=MAX;
+			}
+			if(MAX>beta){
+				break;
+			}
+		}
+		return alpha;
+
+	}
+	if(!isMax){
+		for(let place of possiblePlace(chessBoard)){
+			chessBoard[sign++]=place; //放置棋子
+			let MIN=alphaBeta(chessBoard,alpha,beta,depth-1,true);
+			sign--; //恢复
+			if(MIN<beta){
+				beta=MIN;//更新beta值
+			}
+			if(MIN<alpha){//MIN层节点小于父节点alpha值，剪枝
+				break;
+			}
+		}
+		return beta;
+	}
+}
+
+alphaBeta(chessBoard,-Infinity,Infinity,4,true);
+
+function estimate(chessBoard){
+	let v=chessBoard[0]*8+chessBoard[1]*4+chessBoard[2]*2+chessBoard[3]*1;
+	console.log(v+" 叶子");
+	return value[v];
+}
+function test(arr){ //经测试，传递的数组参数为引用
+	arr=10;
+	console.log(arr);
+}
+window.onload=function(){
+	let a=[1,2,3,4];
+	let b=1;
+	test(b);
+	console.log(b);
+}
+</script>	
+</body>
+</html>
